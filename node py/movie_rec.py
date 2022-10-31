@@ -60,3 +60,9 @@ for movie in sorted_similar_movies:
   if (i<11):
     print(i, '.',title_from_index)
     i+=1
+ 
+sorted_data=movies_data.sort_values(ascending=False,by =['popularity'])
+newdata=sorted_data.head(20)
+homepage_sorted=newdata['title'].tolist()
+for i in range(20):
+  print(i+1,'.',homepage_sorted[i])
