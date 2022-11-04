@@ -1,5 +1,5 @@
 {
-  "type": "module", 
+  "type": "module",
   "name": "node-py",
   "version": "1.0.0",
   "description": "",
@@ -14,6 +14,7 @@
   "dependencies": {
     "body-parser": "^1.20.1",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mongoose": "^6.7.0",
     "nodemon": "^2.0.20"
