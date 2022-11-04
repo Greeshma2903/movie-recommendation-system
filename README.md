@@ -20,9 +20,8 @@ PS: We built this project to practice our skills.
 
 ### For the ML Model
 
-> Run the commands in your terminal/command line. 
-> 
-> Requirements: python3, pip
+> - Run the commands in your terminal/command line. 
+> - Requirements: python3, pip, npm
 
 1. Clone or download the repo on your local system, and navigate to the project directory.
 
@@ -35,10 +34,15 @@ PS: We built this project to practice our skills.
    > Virtualenv is a tool to set up your Python environments. ([read this for installation](https://www.freecodecamp.org/news/how-to-setup-virtual-environments-in-python/))
 
    ```bash
-   python<version> -m venv env
+   # install virtual environment to your host python, if you haven't already:
+      # pip install virtualenv
+      # OR
+      # python -m pip install virtualenv
 
+   # use the virtual env
+   python<version> -m venv env
    # example
-   python3 -m venev env
+   python3 -m venv env
    ```
 
    To activate the virual environment:
@@ -48,8 +52,8 @@ PS: We built this project to practice our skills.
    source env/bin/activate
 
    # on windows
-   env/Scripts/activate.bat //In CMD
-   env/Scripts/Activate.ps1 //In Powershel
+   env/Scripts/activate.bat # in CMD line
+   env/Scripts/Activate.ps1 # in Powershell
    ```
 
 4. Install all the libraries mentioned in the `requirements.txt` file with the command:
@@ -64,6 +68,11 @@ PS: We built this project to practice our skills.
 5. Dectivate the environment after you're done with your work:
    ```bash
    deactivate
+   ```
+6. To run the node server
+   ```bash
+   npm install
+   npm start
    ```
 
 ### Client
@@ -80,7 +89,7 @@ PS: We built this project to practice our skills.
    ```
 3. Run the server at localhost
    ```bash
-   npm run dev --host
+   npm run dev
    ```
 
 ## License
