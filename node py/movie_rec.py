@@ -52,14 +52,25 @@ sorted_similar_movies = sorted(similarity_score, key = lambda x:x[1], reverse = 
 
 print('Movies suggested for you : \n')
 
-i = 1
+# i = 1
 
+# for movie in sorted_similar_movies:
+#   index = movie[0]
+#   title_from_index = movies_data[movies_data.index==index]['title'].values[0]
+#   if (i<11):
+#     print(i, '.',title_from_index)
+#     i+=1
+
+title_from_index=[]
 for movie in sorted_similar_movies:
   index = movie[0]
-  title_from_index = movies_data[movies_data.index==index]['title'].values[0]
-  if (i<11):
-    print(i, '.',title_from_index)
-    i+=1
+  title_from_index.append(movies_data[movies_data.index==index]['title'].values[0])
+
+top_15_titles=[]
+for i in range(15):
+  top_15_titles.append((title_from_index[i]))
+
+print(top_15_titles)
  
 sorted_data=movies_data.sort_values(ascending=False,by =['popularity'])
 newdata=sorted_data.head(20)
