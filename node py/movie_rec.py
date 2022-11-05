@@ -72,8 +72,8 @@ for i in range(15):
 
 print(top_15_titles)
  
-sorted_data=movies_data.sort_values(ascending=False,by =['popularity'])
-newdata=sorted_data.head(20)
-homepage_sorted=newdata['title'].tolist()
-for i in range(20):
-  print(i+1,'.',homepage_sorted[i])
+# sorted_data=movies_data.sort_values(ascending=False,by =['popularity'])
+# newdata=sorted_data.head(20)
+# homepage_sorted=newdata['title'].tolist()
+# for i in range(20):
+#   print(i+1,'.',homepage_sorted[i])

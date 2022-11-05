@@ -19,7 +19,7 @@ const InputForm = () => {
         type="submit"
         ariaLabel="search movie"
         onClick={onSubmitHandler}
-        className="py-2 px-5 font-extrabold font-sans text-lg bg-teal-light rounded-full flex items-center justify-center space-x-3 hover:(shadow-teal-bright shadow-3xl)"
+        className="btn-custom text-lg bg-teal-light space-x-3 hover:(shadow-teal-bright shadow-3xl)"
       >
         <span>search</span>
         <FiArrowRight
