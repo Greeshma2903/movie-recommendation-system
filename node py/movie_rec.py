@@ -4,6 +4,7 @@ import difflib
 import sys
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+import json
 
 movies_data = pd.read_csv('movies.csv')
 # print(movies_data)
@@ -50,7 +51,7 @@ similarity_score = list(enumerate(similarity[index_of_the_movie]))
 
 sorted_similar_movies = sorted(similarity_score, key = lambda x:x[1], reverse = True) 
 
-print('Movies suggested for you : \n')
+# print('Movies suggested for you : \n')
 
 # i = 1
 
@@ -70,7 +71,7 @@ top_15_titles=[]
 for i in range(15):
   top_15_titles.append((title_from_index[i]))
 
-print(top_15_titles)
+print(json.dumps(top_15_titles))
  
 # sorted_data=movies_data.sort_values(ascending=False,by =['popularity'])
 # newdata=sorted_data.head(20)

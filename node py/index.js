@@ -6,6 +6,7 @@ import cors from "cors";
 import userRoutes from "./routes/testroute.js";
 import { spawn } from "child_process";
 import * as dotenv from "dotenv";
+import fetch from "node-fetch";
 
 dotenv.config();
 
@@ -17,33 +18,33 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 // recommended movies
-const childPython = spawn("python", ["movie_rec.py", "iron man"]);
+// const childPython = spawn("python", ["movie_rec.py", "iron man"]);
 
-childPython.stdout.on("data", (data) => {
-  console.log(`stdout: ${data}`);
-});
+// childPython.stdout.on("data", (data) => {
+//   console.log(`stdout: ${data}`);
+// });
 
-childPython.stderr.on("data", (data) => {
-  console.log(`stderr: ${data}`);
-});
+// childPython.stderr.on("data", (data) => {
+//   console.log(`stderr: ${data}`);
+// });
 
-childPython.on("close", (close) => {
-  console.log(`error: ${close}`);
-});
+// childPython.on("close", (close) => {
+//   console.log(`error: ${close}`);
+// });
 
-// app.use("/user", userRoutes);
+app.use("/user", userRoutes);
 
-// const CONNECTION_URL = "mongodb://0.0.0.0:27017/test-app";
+const CONNECTION_URL = "mongodb://0.0.0.0:27017/test-app";
 
-// mongoose
-//   .connect(CONNECTION_URL)
-//   .then(() => {
-//     console.log("Connected to DB!");
-//   })
-//   .catch((error) => {
-//     console.log("Couldn't connect");
-//     console.log(error);
-//   });
+mongoose
+  .connect(CONNECTION_URL)
+  .then(() => {
+    console.log("Connected to DB!");
+  })
+  .catch((error) => {
+    console.log("Couldn't connect");
+    console.log(error);
+  });
 
 // popular movies
 let rawdata = fs.readFileSync("popular-movies.json");
