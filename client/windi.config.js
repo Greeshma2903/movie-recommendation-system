@@ -26,7 +26,7 @@ export default defineConfig({
     },
   },
   shortcuts: {
-    'btn-custom': 'py-2 px-5 font-extrabold font-sans rounded-full flex items-center justify-center',
+    'btn-custom': 'py-2 px-5 font-extrabold font-sans rounded-full flex items-center justify-center transition-shadow ease-out',
     'img-card-size': 'w-44 h-64'
   }
 });

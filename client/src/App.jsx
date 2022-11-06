@@ -8,9 +8,11 @@ function App() {
   const navRoot = document.getElementById("nav-root");
   const [popularMovies, setPopularMovies] = useState([]);
 
+  // Fetch popular movies from server
   async function fetchPopularMovies() {
     const res = await fetch("http://localhost:1300/");
     const popularMoviesData = await res.json();
+    // Save movies to state variable
     setPopularMovies(
       popularMoviesData.map((movieObjects) => {
         return movieObjects.results[0];

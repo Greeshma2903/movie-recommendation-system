@@ -5,7 +5,7 @@ const MoviesContainer = (props) => {
     <div className="grid grid-cols-12-fit justify-items-center sm:justify-items-start gap-y-6">
       {props.movieList.map((movie) => {
         return (
-          <Movie  
+          <Movie
             key={movie.id}
             title={movie.original_title}
             release={new Date(movie.release_date)}
