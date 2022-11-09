@@ -4,7 +4,6 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
 import userRoutes from "./routes/testroute.js";
-import { spawn } from "child_process";
 import * as dotenv from "dotenv";
 import fetch from "node-fetch";
 
@@ -16,21 +15,6 @@ const app = express();
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
-
-// recommended movies
-// const childPython = spawn("python", ["movie_rec.py", "iron man"]);
-
-// childPython.stdout.on("data", (data) => {
-//   console.log(`stdout: ${data}`);
-// });
-
-// childPython.stderr.on("data", (data) => {
-//   console.log(`stderr: ${data}`);
-// });
-
-// childPython.on("close", (close) => {
-//   console.log(`error: ${close}`);
-// });
 
 app.use("/user", userRoutes);
 
@@ -47,8 +31,8 @@ mongoose
   });
 
 // popular movies
-let rawdata = fs.readFileSync("popular-movies.json");
-let popularMovies = JSON.parse(rawdata);
+const rawdata = fs.readFileSync("popular-movies.json");
+const popularMovies = JSON.parse(rawdata);
 
 // Array of movie URLS
 const popularMoviesList = popularMovies.movies.map((movieName) => {
