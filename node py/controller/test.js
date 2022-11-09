@@ -21,12 +21,8 @@ const childPython = spawn("python", ["movie_rec.py", searchmovie]);
 childPython.stdout.on("data", (data) => {
   // console.log(`stdout: ${data}`);
   // how the data is req in frontend?
-  // res.status(201).json(data);
-  // console.log(typeof data)
-  for (let index = 0; index < data.length; index++) {
-    const element = data[index];
-    console.log(JSON.stringify(element))
-  }
+  const sendata = JSON.parse(data);
+  res.status(201).json(sendata);
 });
 childPython.stderr.on("data", (data) => {
   console.log(`stderr: ${data}`);    
