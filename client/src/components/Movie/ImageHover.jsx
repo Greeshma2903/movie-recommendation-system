@@ -1,4 +1,4 @@
-import Button from "./Button";
+import Button from "../UI/Button";
 import { FiArrowRight } from "react-icons/fi";
 
 const ImageHover = (props) => {
@@ -7,7 +7,10 @@ const ImageHover = (props) => {
     props.className;
   return (
     <div className={parentClasses}>
-      <Button className="btn-custom bg-white space-x-1 hover:(shadow-teal-bright shadow-3xl)">
+      <Button
+        className="btn-custom bg-white space-x-1 hover:(shadow-teal-bright shadow-3xl)"
+        onClick={props.clickHandler}
+      >
         <span>read more</span>
         <FiArrowRight
           className="text-red-500 font-font-extrabold"
