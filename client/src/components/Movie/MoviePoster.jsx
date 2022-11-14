@@ -3,7 +3,6 @@ import ImageCard from "../UI/ImageCard";
 import { useState } from "react";
 
 const MoviePoster = (props) => {
-  const imgBaseUrl = "https://image.tmdb.org/t/p/";
   const [hover, setHover] = useState(false);
 
   return (
@@ -24,7 +23,7 @@ const MoviePoster = (props) => {
       />
 
       <ImageCard
-        source={`${imgBaseUrl}original/${props.poster}`}
+        source={`original/${props.poster}`}
         className="absolute top-0 left-0 right-0 -z-10"
       />
     </div>

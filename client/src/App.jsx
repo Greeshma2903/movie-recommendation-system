@@ -1,11 +1,11 @@
 import ReactDOM from "react-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Nav/Navbar";
 import Popular from "./components/PopularMovies/Popular";
 import Contact from "./components/Contact/Contact";
-import SearchSection from "./components/Search/SearchSection";
 import MovieRecommend from "./components/Movie/MovieRecommend";
+import SearchContext from "./helpers/search-context";
 
 function App() {
   const navRoot = document.getElementById("nav-root");
@@ -30,10 +30,9 @@ function App() {
   return (
     <>
       {ReactDOM.createPortal(<Navbar />, navRoot)}
-
       <Routes>
         <Route path="/" element={<Popular movieList={popularMovies} />} />
-          <Route path="/movie" element={<MovieRecommend />} />
+        <Route path="/movie" element={<MovieRecommend />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
     </>

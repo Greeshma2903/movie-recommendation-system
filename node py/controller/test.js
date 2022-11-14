@@ -21,27 +21,36 @@ const router = express.Router();
 export const getPosts = async (req, res) => {
   const searchmovie = JSON.stringify(req.params.data);
   const childPython = spawn("python", ["movie_rec.py", searchmovie]);
-  childPython.stdout.on("data", (data) => {
-    const movieRecommendTitles = JSON.parse(data);
-    // res.send({ data: recommendList });
 
-    const movieRecommendURL = movieRecommendTitles.map((movieName) => {
-      return `https://api.themoviedb.org/3/search/movie?api_key=${process.env.API_KEY}&query=${movieName}`;
-    });
-    const fetchRequests = movieRecommendURL.map((url) => fetch(url));
+  childPython.stdout.on("data", async (data) => {
+    const movieRecommendTitles = JSON.parse(data);
+    movieRecommendTitles.unshift(searchmovie);
+    const fetchRequests = movieRecommendTitles.map((movieTitle) =>
+      fetch(
+        `https://api.themoviedb.org/3/search/movie?api_key=${process.env.API_KEY}&query=${movieTitle}`
+      )
+    );
 
     // API call for details of recommended movies
-    Promise.allSettled(fetchRequests)
-      .then((response) =>
-        Promise.all(
-          response.map((result) => {
-            if (result.status === "fulfilled") return result.value.json();
-          })
-        )
-      )
-      .then((response) => res.send(response));
+    const response = await Promise.allSettled(fetchRequests);
+    const recMovieDetails = await Promise.all(
+      response.map((result) => {
+        if (result.status === "fulfilled") return result.value.json();
+      })
+    );
+    // API call to get details of movie searched by user
+    const searchedMovieID = recMovieDetails[0].results[0].id;
+    const searchedMovieRes = await fetch(`
+    https://api.themoviedb.org/3/movie/${searchedMovieID}?api_key=${process.env.API_KEY}&language=en-US`);
+    const searchedMovieDetails = await searchedMovieRes.json();
+    // send response
+    res.send({
+      searchMovie: searchedMovieDetails,
+      recommendMovies: recMovieDetails,
+    });
   });
   // error handling
+  // FIX: error handling, server crashes on invalid request
   childPython.stderr.on("data", (data) => {
     res.send({ error: "invalid request" });
   });
@@ -49,7 +58,6 @@ export const getPosts = async (req, res) => {
     console.log(`error: ${close}`);
   });
 };
-
 export const createPost = async (req, res) => {
   // const { title, message, selectedFile, creator, tags } = req.body;
   const post = req.body;

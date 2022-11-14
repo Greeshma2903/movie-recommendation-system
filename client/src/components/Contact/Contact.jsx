@@ -1,7 +1,7 @@
 import { FaGithub } from "react-icons/fa";
 import {FiArrowRight} from 'react-icons/fi'
-import Button from "../UI/Button";
 import HeadingTwo from "../UI/HeadingTwo";
+import React from "react";
 
 const Contact = () => {
   return (
@@ -24,4 +24,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default React.memo(Contact);

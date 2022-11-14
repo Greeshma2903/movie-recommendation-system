@@ -1,5 +1,5 @@
 import fs from "fs";
-import express from "express";
+import express, { application } from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
@@ -42,15 +42,13 @@ const popularMoviesList = popularMovies.movies.map((movieName) => {
 // Send API response to frontend
 app.get("/", async (req, res) => {
   const fetchRequests = popularMoviesList.map((url) => fetch(url));
-  Promise.allSettled(fetchRequests)
-    .then((response) =>
-      Promise.all(
-        response.map((result) => {
-          if (result.status === "fulfilled") return result.value.json();
-        })
-      )
-    )
-    .then((response) => res.send(response));
+  const response = await Promise.allSettled(fetchRequests);
+  const results = await Promise.all(
+    response.map((result) => {
+      if (result.status === "fulfilled") return result.value.json();
+    })
+  );
+  res.send(results);
 });
 
 app.listen(PORT, () => {
