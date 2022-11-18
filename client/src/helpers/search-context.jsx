@@ -9,11 +9,9 @@ const SearchContext = React.createContext({
 export const SearchContextProvider = (props) => {
   const [searchVal, setSearchVal] = useState("");
   const [searchResults, setSearchResults] = useState({
-    reqStatus: "error",
     searchedMovie: null,
     recommendMovies: null,
   });
-
   const navigate = useNavigate();
 
   const searchMovieHandler = (movieName) => {
@@ -22,28 +20,27 @@ export const SearchContextProvider = (props) => {
 
   const fetchMovieDetails = async () => {
     const response = await fetch(`http://localhost:1300/user/${searchVal}`);
-    const moviesData = await response.json();
-    console.log(moviesData);
-    if (Object.keys(moviesData)[0] == "error")
-      setSearchResults({
-        reqStatus: "error",
-        searchedMovie: moviesData[0].error,
-        recommendMovies: null,
+    if (response.ok) {
+      const moviesData = await response.json();
+      setSearchResults((prev) => {
+        return {
+          searchedMovie: moviesData.searchMovie,
+          recommendMovies: moviesData.recommendMovies
+        };
       });
-    else
-      setSearchResults({
-        reqStatus: "fullfilled",
-        searchedMovie: moviesData.searchMovie,
-        recommendMovies: moviesData.recommendMovies.splice(1),
-      });
+      console.log(moviesData);
+    } else console.log("error in fetching data");
+    setSearchVal("");
   };
 
   useEffect(() => {
     if (searchVal !== "") {
       fetchMovieDetails();
     }
-    console.log("count");
-    if (searchResults.reqStatus === "fullfilled") navigate("/movie");
+    console.log("context");
+    if (searchResults.searchedMovie !== null) {
+      navigate(`/movie`);
+    }
   }, [searchVal, searchResults]);
 
   const contextValue = {

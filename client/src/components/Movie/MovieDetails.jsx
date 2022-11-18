@@ -12,22 +12,22 @@ const MovieDetails = (props) => {
   // });
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center justify-center space-x-4 my-6">
       <ImageCard
-        source={`original/${props.poster}`}
-        className="border-2 border-teal-bright"
+        source={`original/${props.movie.poster_path}`}
+        className="image__poster basis-1/4"
       />
       <div>
-        <h3 className="my-1 text-xl font-bold">{props.original_title}</h3>
+        <h3 className="my-1 text-xl font-bold">{props.movie.original_title}</h3>
         <div className="flex items-center justify-between text-sm italic font-medium">
           <div className="rating__div flex items-start">
             <HiStar className="text-red-mild mr-1 text-lg" />
-            <p className="text-gray-500">{props.vote_average}/10</p>
+            <p className="text-gray-500">{props.movie.vote_average}/10</p>
           </div>
-          <p className="text-teal-bright">{props.release_date}</p>
+          <p className="text-teal-bright">{props.movie.release_date}</p>
         </div>
         <h4>Overview</h4>
-        <p>{props.overview}</p>
+        <p>{props.movie.overview}</p>
         {/* {movieGenres.map((genre) => {
           return <p>{genre}</p>;
         })} */}

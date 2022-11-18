@@ -23,26 +23,35 @@ export const getPosts = async (req, res) => {
   const childPython = spawn("python", ["movie_rec.py", searchmovie]);
 
   childPython.stdout.on("data", async (data) => {
-    const movieRecommendTitles = JSON.parse(data);
-    movieRecommendTitles.unshift(searchmovie);
-    const fetchRequests = movieRecommendTitles.map((movieTitle) =>
+    const movieResponse = await fetch(
+      `https://api.themoviedb.org/3/search/movie?api_key=${process.env.API_KEY}&query=${searchmovie}`
+    );
+    if (!movieResponse.ok)
+      res.send({
+        error: "Sorry, the movie data doesn't exist on our Database.",
+      });
+    const movieQueryData = await movieResponse.json();
+
+    // API call to get details of movie searched by user
+    const searchedMovieRes = await fetch(`
+    https://api.themoviedb.org/3/movie/${movieQueryData.results[0].id}?api_key=${process.env.API_KEY}&language=en-US`);
+    const searchedMovieDetails = await searchedMovieRes.json();
+
+    const recMovieTitles = JSON.parse(data);
+    const recFetchRequests = recMovieTitles.map((movieTitle) =>
       fetch(
         `https://api.themoviedb.org/3/search/movie?api_key=${process.env.API_KEY}&query=${movieTitle}`
       )
     );
 
     // API call for details of recommended movies
-    const response = await Promise.allSettled(fetchRequests);
+    const response = await Promise.allSettled(recFetchRequests);
     const recMovieDetails = await Promise.all(
       response.map((result) => {
         if (result.status === "fulfilled") return result.value.json();
       })
     );
-    // API call to get details of movie searched by user
-    const searchedMovieID = recMovieDetails[0].results[0].id;
-    const searchedMovieRes = await fetch(`
-    https://api.themoviedb.org/3/movie/${searchedMovieID}?api_key=${process.env.API_KEY}&language=en-US`);
-    const searchedMovieDetails = await searchedMovieRes.json();
+
     // send response
     res.send({
       searchMovie: searchedMovieDetails,

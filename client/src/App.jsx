@@ -5,7 +5,6 @@ import Navbar from "./components/Nav/Navbar";
 import Popular from "./components/PopularMovies/Popular";
 import Contact from "./components/Contact/Contact";
 import MovieRecommend from "./components/Movie/MovieRecommend";
-import SearchContext from "./helpers/search-context";
 
 function App() {
   const navRoot = document.getElementById("nav-root");
