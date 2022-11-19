@@ -22,10 +22,14 @@ export const SearchContextProvider = (props) => {
     const response = await fetch(`http://localhost:1300/user/${searchVal}`);
     if (response.ok) {
       const moviesData = await response.json();
+      if (Object.keys(moviesData).includes("error")) {
+        alert(moviesData.error);
+        return;
+      }
       setSearchResults((prev) => {
         return {
           searchedMovie: moviesData.searchMovie,
-          recommendMovies: moviesData.recommendMovies
+          recommendMovies: moviesData.recommendMovies,
         };
       });
       console.log(moviesData);

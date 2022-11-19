@@ -23,13 +23,21 @@ export const getPosts = async (req, res) => {
   const childPython = spawn("python", ["movie_rec.py", searchmovie]);
 
   childPython.stdout.on("data", async (data) => {
+    const recMovieTitles = JSON.parse(data);
+    console.log(recMovieTitles);
+    if (Object.keys(recMovieTitles).includes("error")) {
+      res.send(recMovieTitles);
+      return;
+    }
     const movieResponse = await fetch(
       `https://api.themoviedb.org/3/search/movie?api_key=${process.env.API_KEY}&query=${searchmovie}`
     );
-    if (!movieResponse.ok)
+    if (!movieResponse.ok) {
       res.send({
-        error: "Sorry, the movie data doesn't exist on our Database.",
+        "error": "Sorry, the movie data doesn't exist on our API Database.",
       });
+      return;
+    }
     const movieQueryData = await movieResponse.json();
 
     // API call to get details of movie searched by user
@@ -37,7 +45,6 @@ export const getPosts = async (req, res) => {
     https://api.themoviedb.org/3/movie/${movieQueryData.results[0].id}?api_key=${process.env.API_KEY}&language=en-US`);
     const searchedMovieDetails = await searchedMovieRes.json();
 
-    const recMovieTitles = JSON.parse(data);
     const recFetchRequests = recMovieTitles.map((movieTitle) =>
       fetch(
         `https://api.themoviedb.org/3/search/movie?api_key=${process.env.API_KEY}&query=${movieTitle}`
@@ -61,7 +68,7 @@ export const getPosts = async (req, res) => {
   // error handling
   // FIX: error handling, server crashes on invalid request
   childPython.stderr.on("data", (data) => {
-    res.send({ error: "invalid request" });
+    res.send({ error: "Invalid request" });
   });
   childPython.on("close", (close) => {
     console.log(`error: ${close}`);

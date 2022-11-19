@@ -1,7 +1,6 @@
 import fs from "fs";
 import express, { application } from "express";
 import bodyParser from "body-parser";
-import mongoose from "mongoose";
 import cors from "cors";
 import userRoutes from "./routes/testroute.js";
 import * as dotenv from "dotenv";
@@ -18,17 +17,18 @@ app.use(cors());
 
 app.use("/user", userRoutes);
 
-const CONNECTION_URL = "mongodb://0.0.0.0:27017/test-app";
+// MongoDb connection => 
+// const CONNECTION_URL = "mongodb://0.0.0.0:27017/test-app";
 
-mongoose
-  .connect(CONNECTION_URL)
-  .then(() => {
-    console.log("Connected to DB!");
-  })
-  .catch((error) => {
-    console.log("Couldn't connect");
-    console.log(error);
-  });
+// mongoose
+//   .connect(CONNECTION_URL)
+//   .then(() => {
+//     console.log("Connected to DB!");
+//   })
+//   .catch((error) => {
+//     console.log("Couldn't connect");
+//     console.log(error);
+//   });
 
 // popular movies
 const rawdata = fs.readFileSync("popular-movies.json");
