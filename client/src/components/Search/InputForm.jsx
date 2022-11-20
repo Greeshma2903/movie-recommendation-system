@@ -9,7 +9,9 @@ const InputForm = () => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     if (inputRef.current.value.trim() !== "")
+    {
       searchCtx.searchMovie(inputRef.current.value.trim());
+    }
     console.log("fetch movie results");
   };
 

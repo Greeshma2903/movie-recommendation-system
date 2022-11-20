@@ -6,15 +6,21 @@ import SearchContext from "../../helpers/search-context";
 import { useState } from "react";
 import HeadingTwo from "../UI/HeadingTwo";
 import { Navigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const MovieRecommend = () => {
   // const [searchValid, setSearchValid] = useState(false);
   const resultsCtx = useContext(SearchContext);
-  // if (resultsCtx.results.reqStatus !== "error") setSearchValid(true);
-  // else setSearchValid(false);
 
   // return back to home on page reload
   if (resultsCtx.results.searchedMovie === null) return <Navigate to="/" />;
+
+  // reset loading animation
+  useEffect(() => {
+    setTimeout(() => {
+      resultsCtx.dataLoading(false);
+    }, 3000)
+  }, [resultsCtx.results]);
 
   const recommendedMovies = resultsCtx.results.recommendMovies.map(
     (movieObjects) => {
@@ -24,7 +30,7 @@ const MovieRecommend = () => {
   console.log(resultsCtx);
   return (
     <>
-      <SearchSection/>
+      <SearchSection />
       <MovieDetails movie={resultsCtx.results.searchedMovie} />
       <HeadingTwo title="Recommended Movies" />
       <MovieContainer movieList={recommendedMovies} />

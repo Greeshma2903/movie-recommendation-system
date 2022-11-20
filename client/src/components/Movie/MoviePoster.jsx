@@ -16,7 +16,7 @@ const MoviePoster = (props) => {
       }}
     >
       <ImageHover
-        className={`img__card__hover absolute top-0 left-0 right-0 z-50 transition-all ease-in delay-100 ${
+        className={`img__card__hover absolute top-0 left-0 right-0 z-30 transition-all ease-in delay-100 ${
           hover ? "visible" : "hidden"
         }`}
         clickHandler={props.onMovieClick}

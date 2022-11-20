@@ -24,7 +24,6 @@ export const getPosts = async (req, res) => {
 
   childPython.stdout.on("data", async (data) => {
     const recMovieTitles = JSON.parse(data);
-    console.log(recMovieTitles);
     if (Object.keys(recMovieTitles).includes("error")) {
       res.send(recMovieTitles);
       return;
