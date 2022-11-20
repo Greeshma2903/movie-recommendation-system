@@ -1,33 +1,45 @@
-# movie-recommendation-system
+# pick-n-chill
 
-A movie recommendation tool built with the help of Machine Learning (content-based recommender system). Ever take too much time trying to find similar movies? Search up a movie on our site and get recommended with simlar movies to match your taste!
+> 🎥 Movie recommendation tool
+
+A **movie recommendation** tool built with the help of Machine Learning (content-based recommender system). Ever take too much time trying to find similar movies? Search up a movie on our site and get recommended with simlar movies to match your taste!
 
 PS: We built this project to practice our skills.
 
+## Table of Contents
+
+- [Team](#team)
+- [Tech Stack](#teck-stack)
+- [Setup Locally](#setup-locally)
+   - [Backend server](#for-the-ml-model-and-node-server)
+   - [Frontend](#client)
+- [Screenshots](#screenshots)
+- [License](#license)
+
 ## Team
 
-- [@hk2257853](https://github.com/hk2257853): Backend, Frontend
+- [@hk2257853](https://github.com/hk2257853): Backend
 - [@Greeshma2903](https://github.com/greeshma2903): Design, Frontend
 - [@Pratham-cymk](https://www.github.com/Pratham-cymk): Machine Learning
 
 ## Tech Stack
 
-- Client: React, WindiCSS
+- Client: React, WindiCSS, React Router
 - Server: Node, Express
 - ML Model: Numpy, Pandas (Python)
 
 ## Setup Locally
 
-### For the ML Model
+### For the ML Model and Node server
 
 > - Run the commands in your terminal/command line. 
 > - Requirements: python3, pip, npm
 
 1. Clone or download the repo on your local system, and navigate to the project directory.
 
-2. Navigate to `node py` directory
+2. Navigate to `server` directory
    ```bash
-   cd 'node py'
+   cd 'server'
    ```
 3. Setup the virtual environment to install the python packages
 
@@ -73,6 +85,11 @@ PS: We built this project to practice our skills.
    ```bash
    npm install
    npm start
+   ```
+7. For the project to work, you need get your API key from [TMDB's website](https://www.themoviedb.org/documentation/api), and store it in a `.env` file in the `server` folder.
+   ```js
+   // .env file
+   API_KEY=###
    ```
 
 ### Client
