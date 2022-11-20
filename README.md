@@ -11,8 +11,8 @@ PS: We built this project to practice our skills.
 - [Team](#team)
 - [Tech Stack](#teck-stack)
 - [Setup Locally](#setup-locally)
-   - [Backend server](#for-the-ml-model-and-node-server)
-   - [Frontend](#client)
+  - [Backend server](#for-the-ml-model-and-node-server)
+  - [Frontend](#client)
 - [Screenshots](#screenshots)
 - [License](#license)
 
@@ -28,14 +28,22 @@ PS: We built this project to practice our skills.
 - Server: Node, Express
 - ML Model: Numpy, Pandas (Python)
 
+### API Used
+
+- The Movie Database: https://developers.themoviedb.org/3/getting-started/introduction
+
 ## Setup Locally
 
-### For the ML Model and Node server
-
-> - Run the commands in your terminal/command line. 
-> - Requirements: python3, pip, npm
+> - Run the commands in your terminal/command line.
+> - Requirements: python3, pip, npm (nodejs)
 
 1. Clone or download the repo on your local system, and navigate to the project directory.
+
+   ```bash
+   git clone https://github.com/Greeshma2903/movie-recommendation-system.git && cd movie-recommendation-system
+   ```
+### For the ML Model and Node server
+
 
 2. Navigate to `server` directory
    ```bash
@@ -78,18 +86,22 @@ PS: We built this project to practice our skills.
    ```
 
 5. Dectivate the environment after you're done with your work:
+
    ```bash
    deactivate
    ```
-6. To run the node server
+
+6. For the project to work, you need get your API key from [TMDB's website](https://www.themoviedb.org/documentation/api), and store it in a `.env` file in the `server` folder.
+
+   ```bash
+   # .env file
+   API_KEY=###
+   ```
+
+7. To run the node server
    ```bash
    npm install
    npm start
-   ```
-7. For the project to work, you need get your API key from [TMDB's website](https://www.themoviedb.org/documentation/api), and store it in a `.env` file in the `server` folder.
-   ```js
-   // .env file
-   API_KEY=###
    ```
 
 ### Client
@@ -108,6 +120,18 @@ PS: We built this project to practice our skills.
    ```bash
    npm run dev
    ```
+
+## Screenshots
+
+<details>
+<summary>click here</summary>
+
+![home page](./client/public/screenshots/home.png)
+![search a movie](./client/public/screenshots/search.png)
+![search results](./client/public/screenshots/search-result.png)
+![contact page](./client/public/screenshots/contact.png)
+
+</details>
 
 ## License
 
